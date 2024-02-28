@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <?php if ($lastTopic) {
                         echo "<div class='card-body'>";
 
-                        echo "<h4 class='card-title mt-3'><u>" . htmlspecialchars_decode($lastTopic['title']) . "</u></h4>";
+                        echo "<h4 class='card-title mt-3'><u>" . ($lastTopic['title']) . "</u></h4>";
                         echo "<p class='card-text'>" . htmlspecialchars_decode($lastTopic['body']) . "</p>";
 
                         echo "</div>";
@@ -133,7 +133,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </script>
         <script>
             ClassicEditor
-                .create(document.querySelector('#editor'))
+                .create(document.querySelector('#editor')),{
+                    removePlugins: ['ImageUpload', 'MediaEmbed', 'ImageResize', 'EasyImage', 'ImageStyle', 'ImageToolbar', 'ImageCaption', 'ImageTextAlternative', 'ImageUpload', 'CKFinder', 'CKFinderUploadAdapter'],
+                    // ckfinder:
+                    // {
+                    //     uploadUrl: 'upload.php'
+                    // }
+                }
+                .then(editor => {
+                    console.log(editor);
+                })
                 .catch(error => {
                     console.error(error);
                 });

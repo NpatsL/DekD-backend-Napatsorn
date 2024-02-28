@@ -32,7 +32,8 @@ class TopicValidator
     }
     public function validateBody()
     {
-        if (strlen($this->topic['body']) < 6 || strlen($this->topic['body']) > 2000) {
+        $body = strip_tags($this->topic['body']);
+        if (strlen($body) < 6 || strlen($body) > 2000) {
             $this->addError('body', 'เนื้อหากระทู้ต้องมีความยาวระหว่าง 6-2000 ตัวอักษร');
         }
     }
