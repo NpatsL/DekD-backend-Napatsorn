@@ -6,6 +6,7 @@ require_once 'topic_validator.php';
 $database = new Database;
 $topics = $database->read();
 $lastTopic = $database->readLast();
+$errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['title']) && isset($_POST['body'])) {
@@ -52,14 +53,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <label for="title">หัวข้อกระทู้</label>
                             <input type="text" class="form-control" id="title" name="title" placeholder="หัวข้อกระทู้" value="<?php echo isset($_POST['title']) ? $_POST['title'] : ''  ?>">
                             <?php
+                            if (array_key_exists('title', $errors)) {
                             echo "<p class='text-danger'>" . $errors['title'] . "</p>";
+                            }
                             ?>
                             <br>
                             <label for="body">เนื้อหากระทู้</label>
                             <textarea class="form-control" id="body" name="body" rows="4" placeholder="เนื้อหากระทู้"><?php echo isset($_POST['body']) ? $_POST['body'] : ''  ?></textarea>
                             <?php
+                            if (array_key_exists('body', $errors)) {
                             echo "<p class='text-danger'>" . $errors['body'] . "</p>";
+                            }
                             ?>
+                            
                             <br>
                             <input type="submit" class="btn btn-primary" value="สร้างกระทู้">
                         </form>
