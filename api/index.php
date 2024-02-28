@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (!$errors) {
             $title = test_intput($_POST['title']);
             $body = test_intput($_POST['body']);
-            $database->insert(test_intput($title), $body);
+            $database->insert($title, $body);
             $lastTopic = $database->readLast();
             $topics = $database->read();
             echo "<meta http-equiv='refresh' content='0'>";
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.ckeditor.com/ckeditor5/38.1.1/classic/ckeditor.js"></script>
-    <title>ตั้งกระทู้ใหม่</title>
+    <title>Napatsorn Dek-D Backend</title>
 </head>
 
 <body>
@@ -65,7 +65,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 echo "<p class='text-danger'>" . $errors['body'] . "</p>";
                             }
                             ?>
-
                             <br>
                             <input type="submit" class="btn btn-primary" value="สร้างกระทู้">
                         </form>
@@ -87,10 +86,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                     <?php if ($lastTopic) {
                         echo "<div class='card-body'>";
-
                         echo "<h4 class='card-title mt-3'><u>" . ($lastTopic['title']) . "</u></h4>";
                         echo "<p class='card-text'>" . htmlspecialchars_decode($lastTopic['body']) . "</p>";
-
                         echo "</div>";
                     }
                     ?>

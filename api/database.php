@@ -1,7 +1,7 @@
 <?php
 
 require_once 'config.php';
-
+date_default_timezone_set("Asia/Bangkok");
 class Database extends Config
 {
     public function read()
@@ -23,11 +23,12 @@ class Database extends Config
     public function insert($title, $body)
     {
 
-        $sql = "INSERT INTO topics (title, body) VALUES (:title, :body)";
+        $sql = "INSERT INTO topics (title, body, created_at) VALUES (:title, :body, :created_at)";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute([
             'title' => $title,
-            'body' => $body
+            'body' => $body,
+            'created_at' => date('Y-m-d H:i:s')
         ]);
         return true;
     }
