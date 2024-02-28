@@ -35,10 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.tiny.cloud/1/7gb95ur3z4720nibl33n5463t47byxjvx70z2k6ittg209a4/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-
-    <script src="https://cdn.tiny.cloud/1/7gb95ur3z4720nibl33n5463t47byxjvx70z2k6ittg209a4/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-
+    <script src="https://cdn.ckeditor.com/ckeditor5/38.1.1/classic/ckeditor.js"></script>
     <title>ตั้งกระทู้ใหม่</title>
 </head>
 
@@ -62,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             ?>
                             <br>
                             <label for="body">เนื้อหากระทู้</label>
-                            <textarea class="form-control" id="body" name="body" rows="4" placeholder="เนื้อหากระทู้"><?php echo isset($_POST['body']) ? $_POST['body'] : ''  ?></textarea>
+                            <textarea class="form-control" id="editor" name="body" rows="4" placeholder="เนื้อหากระทู้"><?php echo isset($_POST['body']) ? $_POST['body'] : ''  ?></textarea>
                             <?php
                             if (array_key_exists('body', $errors)) {
                                 echo "<p class='text-danger'>" . $errors['body'] . "</p>";
@@ -135,23 +132,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         </script>
         <script>
-            tinymce.init({
-                selector: 'textarea',
-                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage advtemplate ai mentions tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
-                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-                tinycomments_mode: 'embedded',
-                tinycomments_author: 'Author name',
-                mergetags_list: [{
-                        value: 'First.Name',
-                        title: 'First Name'
-                    },
-                    {
-                        value: 'Email',
-                        title: 'Email'
-                    },
-                ],
-                ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
-            });
+            ClassicEditor
+                .create(document.querySelector('#editor'))
+                .catch(error => {
+                    console.error(error);
+                });
         </script>
 </body>
 
