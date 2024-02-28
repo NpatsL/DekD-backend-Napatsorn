@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <input type="text" class="form-control" id="title" name="title" placeholder="หัวข้อกระทู้" value="<?php echo isset($_POST['title']) ? $_POST['title'] : ''  ?>">
                             <?php
                             if (array_key_exists('title', $errors)) {
-                            echo "<p class='text-danger'>" . $errors['title'] . "</p>";
+                                echo "<p class='text-danger'>" . $errors['title'] . "</p>";
                             }
                             ?>
                             <br>
@@ -62,10 +62,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <textarea class="form-control" id="body" name="body" rows="4" placeholder="เนื้อหากระทู้"><?php echo isset($_POST['body']) ? $_POST['body'] : ''  ?></textarea>
                             <?php
                             if (array_key_exists('body', $errors)) {
-                            echo "<p class='text-danger'>" . $errors['body'] . "</p>";
+                                echo "<p class='text-danger'>" . $errors['body'] . "</p>";
                             }
                             ?>
-                            
+
                             <br>
                             <input type="submit" class="btn btn-primary" value="สร้างกระทู้">
                         </form>
@@ -85,16 +85,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             ?>
                         </h6>
                     </div>
-                    <?php if($lastTopic){
+                    <?php if ($lastTopic) {
                         echo "<div class='card-body'>";
-                       
-                        echo "<h4 class='card-title mt-3'><u>".htmlspecialchars_decode($lastTopic['title'])."</u></h4>";
-                        echo "<p class='card-text'>".htmlspecialchars_decode($lastTopic['body'])."</p>";
-                    
+
+                        echo "<h4 class='card-title mt-3'><u>" . htmlspecialchars_decode($lastTopic['title']) . "</u></h4>";
+                        echo "<p class='card-text'>" . htmlspecialchars_decode($lastTopic['body']) . "</p>";
+
                         echo "</div>";
                     }
                     ?>
-                
+
                 </div>
                 <br>
                 <div class="card shadow">
@@ -104,8 +104,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <?php
                             if (!$lastTopic) {
                                 echo "ยังไม่มีโพสต์";
-                            }else{
-                                echo "จำนวน ".count($topics)." กระทู้";
+                            } else {
+                                echo "จำนวน " . count($topics) . " กระทู้";
                             }
                             ?>
                         </h6>
@@ -115,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         foreach ($topics as $topic) {
                             echo "<li class='list-group-item'>";
                             echo "<h5 class='card-title mt-2'><u>" . $topic['title'] . "</u></h5>";
-                            echo "<p class='card-text'>".htmlspecialchars_decode($topic['body'])."</p>";
+                            echo "<p class='card-text'>" . htmlspecialchars_decode($topic['body']) . "</p>";
                             echo "</li>";
                         }
                         ?>
@@ -126,7 +126,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
+        <script>
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+            }
+        </script>
 </body>
 
 </html>
