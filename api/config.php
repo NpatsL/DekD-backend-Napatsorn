@@ -11,13 +11,18 @@ class Config
     public function __construct()
     {
         try {
-            $path = dirname(dirname(__FILE__)) . '/.env';
-            $DotEnv = new DotEnv($path);
+            // $path = dirname(dirname(__FILE__)) . '/.env';
+            // $DotEnv = new DotEnv($path);
 
-            $DB_HOST = $_ENV['DB_HOST'];
-            $DB_NAME = $_ENV['DB_NAME'];
-            $DB_USER = $_ENV['DB_USER'];
-            $DB_PASSWORD = $_ENV['DB_PASSWORD'];
+            // $DB_HOST = $_ENV['DB_HOST'];
+            // $DB_NAME = $_ENV['DB_NAME'];
+            // $DB_USER = $_ENV['DB_USER'];
+            // $DB_PASSWORD = $_ENV['DB_PASSWORD'];
+
+            $DB_HOST = getenv('DB_HOST');
+            $DB_NAME = getenv('DB_NAME');
+            $DB_USER = getenv('DB_USER');
+            $DB_PASSWORD = getenv('DB_PASSWORD');
 
             $dsn = 'mysql:host=' . $DB_HOST . ';dbname=' . $DB_NAME;
 
